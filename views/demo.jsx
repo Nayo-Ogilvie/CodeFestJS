@@ -14,6 +14,8 @@ import JSONView from './json-view.jsx';
 import samples from '../src/data/samples.json';
 import cachedModels from '../src/data/models.json';
 
+
+
 const ERR_MIC_NARROWBAND = 'Microphone transcription cannot accommodate narrowband voice models, please select a broadband one.';
 
 export default React.createClass({
@@ -25,7 +27,7 @@ export default React.createClass({
       rawMessages: [],
       formattedMessages: [],
       audioSource: null,
-      speakerLabels: true,
+      speakerLabels: false,
       keywords: this.getKeywords('en-US_BroadbandModel'),
       // transcript model and keywords are the state that they were when the button was clicked.
       // Changing them during a transcription would cause a mismatch between the setting sent to the
@@ -107,6 +109,7 @@ export default React.createClass({
       return;
     }
     this.reset();
+	
     this.setState({ audioSource: 'mic' });
 
     // The recognizeMicrophone() method is a helper method provided by the watson-speech package
@@ -143,26 +146,6 @@ export default React.createClass({
 
   handleUserFileRejection() {
     this.setState({ error: 'Sorry, that file does not appear to be compatible.' });
-  },
-  handleSample1Click() {
-    this.handleSampleClick(1);
-  },
-  handleSample2Click() {
-    this.handleSampleClick(2);
-  },
-
-  handleSampleClick(which) {
-    if (this.state.audioSource === `sample-${which}`) {
-      this.stopTranscription();
-    } else {
-      const filename = samples[this.state.model] && samples[this.state.model][which - 1].filename;
-      if (!filename) {
-        this.handleError(`No sample ${which} available for model ${this.state.model}`, samples[this.state.model]);
-      }
-      this.reset();
-      this.setState({ audioSource: `sample-${which}` });
-      this.playFile(`audio/${filename}`);
-    }
   },
 
   /**
@@ -341,6 +324,7 @@ export default React.createClass({
     if (!r || !r.results || !r.results.length || r.results[0].final) {
       return null;
     }
+	//console.log(r);
     return r;
   },
 
@@ -423,20 +407,6 @@ export default React.createClass({
               />
             </p>
 
-            <p className={this.supportsSpeakerLabels() ? 'base--p' : 'base--p_light'}>
-              <input
-                className="base--checkbox"
-                type="checkbox"
-                checked={this.state.speakerLabels}
-                onChange={this.handleSpeakerLabelsChange}
-                disabled={!this.supportsSpeakerLabels()}
-                id="speaker-labels"
-              />
-              <label className="base--inline-label" htmlFor="speaker-labels">
-                Detect multiple speakers {this.supportsSpeakerLabels() ? '' : ' (Not supported on current model)'}
-              </label>
-            </p>
-
           </div>
         </div>
 
@@ -447,9 +417,6 @@ export default React.createClass({
             <Icon type={this.state.audioSource === 'mic' ? 'stop' : 'microphone'} fill={micIconFill} /> Record Audio
           </button>
 
-          <button className={buttonClass} onClick={this.handleUploadClick}>
-            <Icon type={this.state.audioSource === 'upload' ? 'stop' : 'upload'} /> Upload Audio File
-          </button>
 
         </div>
 
