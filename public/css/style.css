@@ -20,6 +20,7 @@
 
 .tab-panels--tab-list{
     text-align: center;
+    color: #0d2e4c;
 }
 
 .arrow-box-container {
@@ -32,13 +33,13 @@ sup {
 }
 
 h1{
-    color: #9855d4;
+    color: #0d2e4c;
     text-align: center;
     font-family: Simplicity;
 }
 
 body{
-    background-color: #e0e0e0;
+    background-color: #807474;
 }
 
 /* override strange defaults in chrome */
@@ -123,9 +124,6 @@ dialog, dd, dt {
     }
 }
 
-.base--button{
-    background-color: white;
-}
 
 .base--button:focus {
   outline: 0;
@@ -134,9 +132,9 @@ dialog, dd, dt {
 
 
 .base--button.mic-active {
-    //background-color: #E71D32;
-    color: #E71D32;
-    border-color: #E71D32
+    background-color: #0d2e4c;
+    color: white;
+    border-color: #0d2e4c;
 }
 
 .speaker-labels {
