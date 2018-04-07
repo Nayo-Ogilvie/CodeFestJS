@@ -1,3 +1,10 @@
+/*Custom font*/
+/*Simplicity font by Vanessa Bays courtesy of 1001fonts, available here: https://www.1001freefonts.com/simplicity.font */
+@font-face{
+    font-family: Simplicity;
+    src: url('simplicity.ttf');
+}
+
 /* general styles */
 #root {
     margin-bottom: 3rem;
@@ -27,6 +34,7 @@ sup {
 h1{
     color: #9855d4;
     text-align: center;
+    font-family: Simplicity;
 }
 
 body{
@@ -115,15 +123,19 @@ dialog, dd, dt {
     }
 }
 
+.base--button{
+    background-color: white;
+}
 
 .base--button:focus {
   outline: 0;
+  
 }
 
 
 .base--button.mic-active {
-    background-color: #E71D32;
-    color: white;
+    //background-color: #E71D32;
+    color: #E71D32;
     border-color: #E71D32
 }
 
