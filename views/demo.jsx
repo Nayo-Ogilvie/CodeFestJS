@@ -412,35 +412,6 @@ export default React.createClass({
         }}
       >
 
-        <div className="drop-info-container">
-          <div className="drop-info">
-            <h1>Drop an audio file here.</h1>
-            <p>{'Watson Speech to Text supports .mp3, .mpeg, .wav, .opus, and .flac files up to 200mb.'}</p>
-          </div>
-        </div>
-
-        <h2 className="base--h2">Transcribe Audio</h2>
-
-        <ul className="base--ul">
-          {micBullet}
-          <li className="base--li">{'Upload pre-recorded audio (.mp3, .mpeg, .wav, .flac, or .opus only).'}</li>
-          <li className="base--li">Play one of the sample audio files.*</li>
-        </ul>
-
-        <div className="smalltext">
-          {'*Both US English broadband sample audio files are covered under the Creative Commons license.'}
-        </div>
-
-        <div style={{
-          paddingRight: '3em',
-          paddingBottom: '2em',
-        }}
-        >
-          The returned result includes the recognized text, {' '}
-          <a className="base--a" href="https://console.bluemix.net/docs/services/speech-to-text/output.html#word_alternatives">word alternatives</a>, {' '}
-          and <a className="base--a" href="https://console.bluemix.net/docs/services/speech-to-text/output.html#keyword_spotting">spotted keywords</a>. {' '}
-          Some models can <a className="base--a" href="https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels">detect multiple speakers</a>; this may slow down performance.
-        </div>
         <div className="flex setup">
           <div className="column">
 
@@ -467,18 +438,6 @@ export default React.createClass({
             </p>
 
           </div>
-          <div className="column">
-
-            <p>Keywords to spot: <input
-              value={this.getKeywordsArrUnique().join()}
-              onChange={this.handleKeywordsChange}
-              type="text"
-              id="keywords"
-              placeholder="Type comma separated keywords here (optional)"
-              className="base--input"
-            /></p>
-
-          </div>
         </div>
 
 
@@ -492,14 +451,6 @@ export default React.createClass({
             <Icon type={this.state.audioSource === 'upload' ? 'stop' : 'upload'} /> Upload Audio File
           </button>
 
-          <button className={buttonClass} onClick={this.handleSample1Click}>
-            <Icon type={this.state.audioSource === 'sample-1' ? 'stop' : 'play'} /> Play Sample 1
-          </button>
-
-          <button className={buttonClass} onClick={this.handleSample2Click}>
-            <Icon type={this.state.audioSource === 'sample-2' ? 'stop' : 'play'} /> Play Sample 2
-          </button>
-
         </div>
 
         {err}
@@ -509,19 +460,6 @@ export default React.createClass({
             {this.state.settingsAtStreamStart.speakerLabels
               ? <SpeakersView messages={messages} />
               : <Transcript messages={messages} />}
-          </Pane>
-          <Pane label="Word Timings and Alternatives">
-            <TimingView messages={messages} />
-          </Pane>
-          <Pane label={`Keywords ${getKeywordsSummary(this.state.settingsAtStreamStart.keywords, messages)}`}>
-            <Keywords
-              messages={messages}
-              keywords={this.state.settingsAtStreamStart.keywords}
-              isInProgress={!!this.state.audioSource}
-            />
-          </Pane>
-          <Pane label="JSON">
-            <JSONView raw={this.state.rawMessages} formatted={this.state.formattedMessages} />
           </Pane>
         </Tabs>
 
