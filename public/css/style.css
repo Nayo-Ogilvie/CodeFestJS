@@ -26,6 +26,7 @@ sup {
 
 h1{
     color: #9855d4;
+    text-align: center;
 }
 
 body{
@@ -114,13 +115,9 @@ dialog, dd, dt {
     }
 }
 
-button{
-    background-color: white;
-}
 
 .base--button:focus {
   outline: 0;
-  background-color: white;
 }
 
 
