@@ -9,7 +9,7 @@ export default function Layout(props) {
   return (
     <html lang="en">
       <head>
-        <title>Speech to Text Demo</title>
+        <title>NoteBuddy</title>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,6 +18,7 @@ export default function Layout(props) {
         <link rel="stylesheet" href="/css/style.css" />
       </head>
       <body>
+	<h1>NoteBuddy</h1>
         <div id="root">
           {props.children}
         </div>
